@@ -18,3 +18,4 @@ You can download the compiled binaries for Windows x64 on the 8x8 board playing 
 
 ![The game](https://i.imgur.com/gQkiD4E.png)
 # MCTS-Gravity
+# MCTS-Gravity
