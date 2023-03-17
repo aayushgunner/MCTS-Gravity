@@ -10,8 +10,8 @@
 typedef char player_indicator;
 typedef char coord;
 
-#define BOARD_SIZE 8
-#define TO_WIN 5
+#define BOARD_SIZE 7
+#define TO_WIN 4
 
 #define NONE 0
 #define PLAYER_X 1

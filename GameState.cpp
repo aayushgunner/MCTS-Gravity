@@ -118,7 +118,12 @@ bool GameState::canMoveHere(coord x, coord y)
 	if (winner != NONE)
 		return false;
 
-	return getBoardStateAt(x, y) == NONE;
+	if ((getBoardStateAt (x, y)== NONE) && ((y==6) ||  (getBoardStateAt (x,y+1)))) {
+
+		return true;
+	}
+return false;
+	//return getBoardStateAt(x, y) == NONE;
 }
 
 bool GameState::isBoardFull()

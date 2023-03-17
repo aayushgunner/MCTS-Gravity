@@ -5,7 +5,7 @@ CC = g++
 SRC_DIR = .
 SRCS    = $(wildcard $(SRC_DIR)/*.cpp)
 THREADS = pthread
-OUT_APP = TicTacToe
+OUT_APP = Gravity
 LIB_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
 build:
