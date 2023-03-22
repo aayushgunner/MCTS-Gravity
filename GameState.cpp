@@ -4,8 +4,8 @@ std::random_device GameState::rd;
 std::mt19937 GameState::g(GameState::rd());
 
 player_indicator GameState::getBoardStateAt(coord x, coord y)
-{
-	return board[y * BOARD_SIZE + x];
+{                                                    
+	return board[y * BOARD_SIZE + x];    //1d array for board representation 
 }
 
 void GameState::put(coord x, coord y)
@@ -15,7 +15,7 @@ void GameState::put(coord x, coord y)
 
 bool GameState::checkWinnerAfterMove(coord xx, coord yy)
 {
-	//CHECK HORIZONTAL WIN
+	// CHECK HORIZONTAL WIN
 	int horizontal = 0;
 	for (coord x = xx + 1; x < BOARD_SIZE; x++)
 	{
@@ -36,7 +36,7 @@ bool GameState::checkWinnerAfterMove(coord xx, coord yy)
 	if (horizontal >= TO_WIN - 1)
 		return true;
 
-	//CHECK VERTICAL WIN
+	// CHECK VERTICAL WIN
 	int vertical = 0;
 
 	for (coord y = yy + 1; y < BOARD_SIZE; y++)
@@ -58,7 +58,7 @@ bool GameState::checkWinnerAfterMove(coord xx, coord yy)
 	if (vertical >= TO_WIN - 1)
 		return true;
 
-	//CHECK DIAGONAL WIN
+	// CHECK DIAGONAL WIN
 	int diagonal = 0;
 
 	for (coord x = xx + 1, y = yy + 1; x < BOARD_SIZE && y < BOARD_SIZE; x++, y++)
@@ -80,7 +80,7 @@ bool GameState::checkWinnerAfterMove(coord xx, coord yy)
 	if (diagonal >= TO_WIN - 1)
 		return true;
 
-	//CHECK ANTIDIAGONAL WIN
+	// CHECK ANTIDIAGONAL WIN
 	int antidiagonal = 0;
 
 	for (coord x = xx - 1, y = yy + 1; x >= 0 && y < BOARD_SIZE; x--, y++)
@@ -118,12 +118,13 @@ bool GameState::canMoveHere(coord x, coord y)
 	if (winner != NONE)
 		return false;
 
-	if ((getBoardStateAt (x, y)== NONE) && ((y==6) ||  (getBoardStateAt (x,y+1)))) {
+	if ((getBoardStateAt(x, y) == NONE) && ((y == 6) || (getBoardStateAt(x, y + 1))))
+	{
 
 		return true;
 	}
-return false;
-	//return getBoardStateAt(x, y) == NONE;
+	return false;
+	// return getBoardStateAt(x, y) == NONE;
 }
 
 bool GameState::isBoardFull()
@@ -142,7 +143,7 @@ std::vector<Move> GameState::getAllLegalMoves()
 	for (coord y = 0; y < BOARD_SIZE; y++)
 		for (coord x = 0; x < BOARD_SIZE; x++)
 			if (canMoveHere(x, y))
-				moves.push_back(Move{ x, y });
+				moves.push_back(Move{x, y});
 
 	return moves;
 }
@@ -163,11 +164,10 @@ void GameState::move(coord x, coord y)
 		currentTurn = PLAYER_X;
 }
 
-void GameState::move(const Move & m)
+void GameState::move(const Move &m)
 {
 	move(m.x, m.y);
 }
-
 
 player_indicator GameState::getWinner()
 {
@@ -180,7 +180,6 @@ player_indicator GameState::getPreviousTurnIndicator()
 		return PLAYER_O;
 
 	return PLAYER_X;
-
 }
 
 player_indicator GameState::playRandomGame()
@@ -192,7 +191,7 @@ player_indicator GameState::playRandomGame()
 
 	std::shuffle(allLegalMoves.begin(), allLegalMoves.end(), g);
 
-	for (auto& move : allLegalMoves)
+	for (auto &move : allLegalMoves)
 	{
 		this->move(move);
 		if (getWinner() != NONE)

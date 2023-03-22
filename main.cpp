@@ -7,6 +7,7 @@
 #include <condition_variable>
 #include <atomic>
 #include <cmath>
+#include<unistd.h>
 
 const int OFFSET = 6;
 
@@ -93,7 +94,7 @@ int main()
 	bool drawLastMoveRect = false;
 	sf::RectangleShape lastMoveRect;
 	lastMoveRect.setSize(sf::Vector2f(WIDTH_HEIGHT, WIDTH_HEIGHT));
-	lastMoveRect.setFillColor(sf::Color::White);
+	lastMoveRect.setFillColor(sf::Color::Red);
 	lastMoveRect.setOutlineThickness(THICKNESS - 6);
 	lastMoveRect.setOutlineColor(sf::Color::White);
 
@@ -130,7 +131,7 @@ int main()
 	endGameText.setOutlineColor(sf::Color::Black);
 
 	thinkingText.setCharacterSize(30);
-	thinkingText.setString("Lyamma lyamma sochdai chu");
+	thinkingText.setString("Yo mann lemme thinkk");
 	thinkingText.setFont(font);
 	thinkingText.setPosition(window.getSize().x / 2 - thinkingText.getGlobalBounds().width / 2, window.getSize().y / 2 -  9* thinkingText.getGlobalBounds().height );
 	thinkingText.setFillColor(sf::Color(67, 146, 210, 200));
@@ -242,6 +243,7 @@ int main()
 				if (gameState.getBoardStateAt(x, y) == PLAYER_O)
 				{
 					circle.setPosition(sf::Vector2f(OFFSET + SIZE_BTN * x+3, OFFSET + SIZE_BTN * y+3));
+					circle.setFillColor(sf::Color::Yellow);
 					window.draw(circle);
 				}
 

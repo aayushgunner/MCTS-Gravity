@@ -1,4 +1,3 @@
-#pragma once
 #include <memory>
 #include <algorithm>
 #include "GameState.h"
