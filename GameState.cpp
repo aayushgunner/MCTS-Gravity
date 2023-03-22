@@ -5,12 +5,12 @@ std::mt19937 GameState::g(GameState::rd());
 
 player_indicator GameState::getBoardStateAt(coord x, coord y)
 {                                                    
-	return board[y * BOARD_SIZE + x];    //1d array for board representation 
+	return board[x][y];    //1d array for board representation 
 }
 
 void GameState::put(coord x, coord y)
 {
-	board[y * BOARD_SIZE + x] = currentTurn;
+	board[x][y] = currentTurn;
 }
 
 bool GameState::checkWinnerAfterMove(coord xx, coord yy)
@@ -129,9 +129,12 @@ bool GameState::canMoveHere(coord x, coord y)
 
 bool GameState::isBoardFull()
 {
-	for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++)
-		if (board[i] == NONE)
+	for (int i = 0; i < BOARD_SIZE ; i++) {
+	for (int j=0 ;j <BOARD_SIZE;j++) {
+		if (board[i][j] == NONE)
 			return false;
+	}
+}
 
 	return true;
 }
@@ -157,11 +160,7 @@ void GameState::move(coord x, coord y)
 	else if (isBoardFull())
 		winner = DRAW;
 
-	if (currentTurn == PLAYER_X)
-		currentTurn = PLAYER_O;
-
-	else
-		currentTurn = PLAYER_X;
+	currentTurn = currentTurn==PLAYER_X ? PLAYER_O : PLAYER_X;
 }
 
 void GameState::move(const Move &m)
@@ -176,10 +175,12 @@ player_indicator GameState::getWinner()
 
 player_indicator GameState::getPreviousTurnIndicator()
 {
-	if (currentTurn == PLAYER_X)
-		return PLAYER_O;
+	// if (currentTurn == PLAYER_X)
+	// 	return PLAYER_O;
 
-	return PLAYER_X;
+	// return PLAYER_X;
+
+	return currentTurn == PLAYER_X ? PLAYER_O:PLAYER_X;
 }
 
 player_indicator GameState::playRandomGame()
@@ -191,12 +192,12 @@ player_indicator GameState::playRandomGame()
 
 	std::shuffle(allLegalMoves.begin(), allLegalMoves.end(), g);
 
-	for (auto &move : allLegalMoves)
-	{
-		this->move(move);
-		if (getWinner() != NONE)
-			break;
-	}
+		for (auto &move : allLegalMoves)
+		{
+			this->move(move);
+			if (getWinner() != NONE)
+				break;
+		}
 
 	return getWinner();
 }

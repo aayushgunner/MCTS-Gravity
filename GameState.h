@@ -27,7 +27,7 @@ struct Move
 class GameState
 {
 private:
-	player_indicator board[BOARD_SIZE * BOARD_SIZE];
+	player_indicator board[BOARD_SIZE][BOARD_SIZE];
 	player_indicator currentTurn = PLAYER_O;
 	player_indicator winner = NONE;
 
